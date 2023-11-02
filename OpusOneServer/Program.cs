@@ -25,6 +25,10 @@ namespace OpusOneServer
                 options.Cookie.IsEssential = true;
             });
 
+            #region DB_CONTEXT
+            string connection = builder.Configuration.GetConnectionString("OpusOneDB");
+            builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
+            #endregion
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -46,10 +50,6 @@ namespace OpusOneServer
 
             app.Run();
 
-            #region DB_CONTEXT
-            string connection = builder.Configuration.GetConnectionString("OpusOneDB");
-            builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
-            #endregion
         }
     }
 }

@@ -4,7 +4,7 @@ using OpusOneServerBL.Models;
 
 namespace OpusOneServer.Controllers
 {
-    [Route("OpusOneAPI")]
+    [Route("[controller]")]
     [ApiController]
     public class OpusOneController : ControllerBase
     {
@@ -16,6 +16,11 @@ namespace OpusOneServer.Controllers
         }
         #endregion
 
-
+        [Route(nameof(Hello))]
+        [HttpGet]
+        public async Task<ActionResult> Hello()
+        {
+            return Ok("hi");
+        }
     }
 }
