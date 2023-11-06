@@ -13,6 +13,11 @@ namespace OpusOneServer
 
             // Add services to the container.
 
+            #region DB_CONTEXT
+            string connection = builder.Configuration.GetConnectionString("OpusOneDB");
+            builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
+            #endregion
+
             builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler=ReferenceHandler.Preserve);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -25,10 +30,7 @@ namespace OpusOneServer
                 options.Cookie.IsEssential = true;
             });
 
-            #region DB_CONTEXT
-            string connection = builder.Configuration.GetConnectionString("OpusOneDB");
-            builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
-            #endregion
+            
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
