@@ -35,7 +35,7 @@ namespace OpusOneServer.Controllers
                 return Ok(u);
             }
 
-            return Forbid();
+            return BadRequest();
         }
     }
 }
