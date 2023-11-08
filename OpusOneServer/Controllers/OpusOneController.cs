@@ -20,14 +20,14 @@ namespace OpusOneServer.Controllers
         [HttpGet]
         public async Task<ActionResult> Hello()
         {
-            return Forbid();
+            return Ok("hi");
         }
 
         [Route(nameof(Login))]
-        [HttpPost]
+        [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
         {
-            User u = context.Users.Where(x => x.Username == user.Username && x.Pwsd == x.Pwsd).FirstOrDefault();
+            User u = context.Users.Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
 
             if(u != null)
             {
@@ -35,7 +35,7 @@ namespace OpusOneServer.Controllers
                 return Ok(u);
             }
 
-            return BadRequest();
+            return Unauthorized();
         }
     }
 }
