@@ -16,6 +16,7 @@ namespace OpusOneServer.Controllers
         }
         #endregion
 
+
         [Route(nameof(Hello))]
         [HttpGet]
         public async Task<ActionResult> Hello()
