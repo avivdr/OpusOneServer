@@ -38,5 +38,18 @@ namespace OpusOneServer.Controllers
 
             return Unauthorized();
         }
+
+        [Route(nameof(Register))]
+        [HttpPost]
+        public async Task<ActionResult> Register([FromBody] User user)
+        {
+            if (context.Users.FirstOrDefault(u => u.Username == user.Username) != null)
+                return Conflict();
+
+            context.Users.Add(user);
+            await context.SaveChangesAsync();
+
+            return Ok();
+        }
     }
 }
