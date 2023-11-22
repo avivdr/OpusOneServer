@@ -46,8 +46,15 @@ namespace OpusOneServer.Controllers
             if (context.Users.FirstOrDefault(u => u.Username == user.Username) != null)
                 return Conflict();
 
-            context.Users.Add(user);
-            await context.SaveChangesAsync();
+            try
+            {
+                context.Users.Add(user);
+                await context.SaveChangesAsync();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Register error");
+            }
 
             return Ok();
         }
