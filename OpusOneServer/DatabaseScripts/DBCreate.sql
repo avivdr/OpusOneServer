@@ -66,3 +66,5 @@ GO
 INSERT INTO Users Values('kiki123', '12345', 'kiki@gmail.com');
 
 GO
+
+--scaffold-dbcontext "Server=localhost\sqlexpress;Database=OpusOneDB;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
