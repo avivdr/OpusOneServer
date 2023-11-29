@@ -10,4 +10,6 @@ public partial class WorksUser
     public int UserId { get; set; }
 
     public int WorkId { get; set; }
+
+    public virtual User User { get; set; } = null!;
 }

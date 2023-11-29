@@ -19,5 +19,7 @@ public partial class Forum
 
     public int? Composer { get; set; }
 
+    public virtual User Creator { get; set; } = null!;
+
     public virtual ICollection<ForumComment> ForumComments { get; set; } = new List<ForumComment>();
 }

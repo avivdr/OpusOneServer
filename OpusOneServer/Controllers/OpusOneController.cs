@@ -24,6 +24,56 @@ namespace OpusOneServer.Controllers
             return Ok("hi");
         }
 
+        [Route(nameof(GetPosts))]
+        [HttpGet]
+        public async Task<ActionResult<List<Post>>> GetPosts()
+        {
+            return Ok(context.Posts.ToList());
+        }
+
+        [Route(nameof(Post))]
+        [HttpPost]
+        public async Task<ActionResult> UploadPost([FromBody] Post post, [FromForm] IFormFile file)
+        {
+            if (post == null)
+                return BadRequest();
+
+            if (file == null || file.Length == 0)
+            {
+                try
+                {
+                    context.Posts.Add(post);
+                    await context.SaveChangesAsync();
+                    return Ok();
+                }
+                catch(Exception)
+                {
+                    return BadRequest();
+                }
+            }
+            
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", post.CreatorId.ToString(), file.FileName);
+            //creates a unique file path
+            for (int i = 1; System.IO.File.Exists(path); i++)
+            {
+                path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", post.CreatorId.ToString(),
+                    Path.GetFileNameWithoutExtension(file.FileName) + i.ToString(), Path.GetExtension(file.FileName));
+            }
+                
+            using (var fileStream = new FileStream(path, FileMode.Create))
+            {
+                try
+                {
+                    file.CopyTo(fileStream);
+                    return Ok();
+                }
+                catch (Exception)
+                {
+                    return BadRequest();
+                }
+            }
+        }
+
         [Route(nameof(Login))]
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
