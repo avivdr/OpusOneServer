@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="NewFolder\**" />
+    <Content Remove="NewFolder\**" />
+    <EmbeddedResource Remove="NewFolder\**" />
+    <None Remove="NewFolder\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.1" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.13">
@@ -30,8 +37,7 @@
   <ItemGroup>
     <Folder Include="DatabaseScripts\" />
     <Folder Include="DTO\" />
-    <Folder Include="NewFolder\" />
-    <Folder Include="Wwwroot\" />
+    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 </Project>

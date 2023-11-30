@@ -16,6 +16,4 @@ public partial class Comment
     public DateTime UploadDateTime { get; set; }
 
     public virtual User Creator { get; set; } = null!;
-
-    public virtual Post Post { get; set; } = null!;
 }

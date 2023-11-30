@@ -13,15 +13,11 @@ public partial class Post
 
     public string? Content { get; set; }
 
-    public string? FilePath { get; set; }
-
     public DateTime UploadDateTime { get; set; }
 
     public int? Work { get; set; }
 
     public int? Composer { get; set; }
-
-    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual User Creator { get; set; } = null!;
 }

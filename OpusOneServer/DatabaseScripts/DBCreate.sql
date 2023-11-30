@@ -27,7 +27,6 @@ Create Table Posts(
 	CreatorID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 	Title nvarchar(100) NOT NULL,
 	Content nvarchar(1000) ,
-	FilePath nvarchar(255),
 	UploadDateTime datetime NOT NULL,
 	Work int,
 	Composer int,

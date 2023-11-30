@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpusOneServerBL.Models;
+using System.Text.Json;
 
 namespace OpusOneServer.Controllers
 {
@@ -31,35 +32,33 @@ namespace OpusOneServer.Controllers
             return Ok(context.Posts.ToList());
         }
 
-        [Route(nameof(Post))]
+        [Route(nameof(UploadPost))]
         [HttpPost]
-        public async Task<ActionResult> UploadPost([FromBody] Post post, [FromForm] IFormFile file)
+        public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile file)
         {
-            if (post == null)
+            Post p = JsonSerializer.Deserialize<Post>(post);
+            if (p == null)
                 return BadRequest();
 
+            try
+            {
+                p = context.Posts.Add(p).Entity;
+                await context.SaveChangesAsync();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+
             if (file == null || file.Length == 0)
-            {
-                try
-                {
-                    context.Posts.Add(post);
-                    await context.SaveChangesAsync();
-                    return Ok();
-                }
-                catch(Exception)
-                {
-                    return BadRequest();
-                }
-            }
-            
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", post.CreatorId.ToString(), file.FileName);
-            //creates a unique file path
-            for (int i = 1; System.IO.File.Exists(path); i++)
-            {
-                path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", post.CreatorId.ToString(),
-                    Path.GetFileNameWithoutExtension(file.FileName) + i.ToString(), Path.GetExtension(file.FileName));
-            }
-                
+                return Ok();
+
+            string newFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", p.CreatorId.ToString());
+            if (!Directory.Exists(newFolderPath))            
+                Directory.CreateDirectory(newFolderPath);
+
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString());
+
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
                 try
