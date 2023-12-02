@@ -10,7 +10,7 @@ Create Table Users (
 	ID int IDENTITY PRIMARY KEY,
 	Username nvarchar(100) NOT NULL,
 	Pwsd nvarchar(100) NOT NULL,
-	Email nvarchar(100) NOT NULL, 
+	Email nvarchar(100) NOT NULL,
 	CONSTRAINT UC_Username UNIQUE(Username)
 )
 GO

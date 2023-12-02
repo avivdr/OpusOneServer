@@ -35,7 +35,7 @@ public partial class OpusOneDbContext : DbContext
     {
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC270F3C590D");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC275E020C30");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -46,12 +46,17 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.Creator).WithMany(p => p.Comments)
                 .HasForeignKey(d => d.CreatorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Comments__Creato__2E1BDC42");
+                .HasConstraintName("FK__Comments__Creato__3E52440B");
+
+            entity.HasOne(d => d.Post).WithMany(p => p.Comments)
+                .HasForeignKey(d => d.PostId)
+                .OnDelete(DeleteBehavior.ClientSetNull)
+                .HasConstraintName("FK__Comments__PostID__3D5E1FD2");
         });
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC27289A368F");
+            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC27A776E7EC");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
@@ -62,12 +67,12 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.Creator).WithMany(p => p.Forums)
                 .HasForeignKey(d => d.CreatorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Forums__CreatorI__30F848ED");
+                .HasConstraintName("FK__Forums__CreatorI__412EB0B6");
         });
 
         modelBuilder.Entity<ForumComment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC27B5599879");
+            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC2779C2CEE1");
 
             entity.ToTable("ForumComment");
 
@@ -80,17 +85,17 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.Creator).WithMany(p => p.ForumComments)
                 .HasForeignKey(d => d.CreatorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ForumComm__Creat__34C8D9D1");
+                .HasConstraintName("FK__ForumComm__Creat__44FF419A");
 
             entity.HasOne(d => d.Forum).WithMany(p => p.ForumComments)
                 .HasForeignKey(d => d.ForumId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ForumComm__Forum__33D4B598");
+                .HasConstraintName("FK__ForumComm__Forum__440B1D61");
         });
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC276CF91C5C");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC278F12874F");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -101,12 +106,12 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.Creator).WithMany(p => p.Posts)
                 .HasForeignKey(d => d.CreatorId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Posts__CreatorID__3F466844");
+                .HasConstraintName("FK__Posts__CreatorID__3A81B327");
         });
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC27744E63DB");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC270903693D");
 
             entity.HasIndex(e => e.Username, "UC_Username").IsUnique();
 
@@ -118,7 +123,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<WorksUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC2721E49028");
+            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC27FEA59A1D");
 
             entity.ToTable("Works_Users");
 
@@ -129,7 +134,7 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.WorksUsers)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Works_Use__UserI__276EDEB3");
+                .HasConstraintName("FK__Works_Use__UserI__37A5467C");
         });
 
         OnModelCreatingPartial(modelBuilder);

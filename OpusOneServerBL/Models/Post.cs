@@ -19,5 +19,7 @@ public partial class Post
 
     public int? Composer { get; set; }
 
+    public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
+
     public virtual User Creator { get; set; } = null!;
 }
