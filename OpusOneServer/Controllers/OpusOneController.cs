@@ -77,7 +77,7 @@ namespace OpusOneServer.Controllers
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
         {
-            User u = context.Users.Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
+            User u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
 
             if(u != null)
             {

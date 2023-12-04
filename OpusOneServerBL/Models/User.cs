@@ -21,5 +21,5 @@ public partial class User
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 
-    public virtual ICollection<WorksUser> WorksUsers { get; set; } = new List<WorksUser>();
+   public virtual ICollection<WorksUser> WorksUsers { get; set; } = new List<WorksUser>();
 }
