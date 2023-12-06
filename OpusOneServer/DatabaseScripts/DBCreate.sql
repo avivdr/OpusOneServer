@@ -5,11 +5,13 @@ GO
 Use OpusOneDB;
 GO
 
+drop table Users
+GO
 
 Create Table Users (
 	ID int IDENTITY PRIMARY KEY,
 	Username nvarchar(100) NOT NULL,
-	Pwsd nvarchar(100) NOT NULL,
+	[Password] nvarchar(100) NOT NULL,
 	Email nvarchar(100) NOT NULL,
 	CONSTRAINT UC_Username UNIQUE(Username)
 )
@@ -59,6 +61,21 @@ Create Table ForumComment(
 	CreatorID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 	Content nvarchar(1000) NOT NULL,
 	UploadDateTime datetime NOT NULL,
+)
+GO
+
+Create Table Composers(
+	Id int PRIMARY KEY NOT NULL,
+	[Name] varchar(255) NOT NULL,
+	Complete_Name varchar(255) NOT NULL,
+)
+GO
+
+Create Table Works(
+	Id int PRIMARY KEY NOT NULL,
+	Composer_Id int FOREIGN KEY REFERENCES Composers(Id) NOT NULL,
+	Title nvarchar(255) NOT NULL,
+	Genre varchar(255) NOT NULL,
 )
 GO
 

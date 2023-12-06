@@ -105,6 +105,7 @@ namespace OpusOneServer.Controllers
                 throw new Exception("Register error");
             }
 
+            HttpContext.Session.SetObject("user", user);
             return Ok();
         }
     }
