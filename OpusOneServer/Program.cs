@@ -18,7 +18,7 @@ namespace OpusOneServer
             builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
             #endregion
 
-            builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler=ReferenceHandler.Preserve);
+            builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

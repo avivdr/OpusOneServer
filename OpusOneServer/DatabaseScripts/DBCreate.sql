@@ -5,9 +5,6 @@ GO
 Use OpusOneDB;
 GO
 
-drop table Users
-GO
-
 Create Table Users (
 	ID int IDENTITY PRIMARY KEY,
 	Username nvarchar(100) NOT NULL,
@@ -17,12 +14,6 @@ Create Table Users (
 )
 GO
 
-Create Table Works_Users(
-	ID int IDENTITY PRIMARY KEY,
-	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-	WorkID int NOT NULL,
-)
-GO
 
 Create Table Posts(
 	ID int IDENTITY PRIMARY KEY,
@@ -76,6 +67,13 @@ Create Table Works(
 	Composer_Id int FOREIGN KEY REFERENCES Composers(Id) NOT NULL,
 	Title nvarchar(255) NOT NULL,
 	Genre varchar(255) NOT NULL,
+)
+GO
+
+Create Table Works_Users(
+	ID int IDENTITY PRIMARY KEY,
+	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
+	WorkID int NOT NULL FOREIGN KEY REFERENCES Users(Id),
 )
 GO
 

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using OpusOneServerBL.Models;
 using System.Text.Json;
+using System.IO;
 
 namespace OpusOneServer.Controllers
 {
@@ -36,7 +37,7 @@ namespace OpusOneServer.Controllers
         [HttpPost]
         public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile file)
         {
-            Post p = JsonSerializer.Deserialize<Post>(post);
+            Post? p = JsonSerializer.Deserialize<Post>(post);
             if (p == null)
                 return BadRequest();
 
@@ -57,7 +58,7 @@ namespace OpusOneServer.Controllers
             if (!Directory.Exists(newFolderPath))            
                 Directory.CreateDirectory(newFolderPath);
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString());
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString(), Path.GetExtension(file.FileName));
 
             using (var fileStream = new FileStream(path, FileMode.Create))
             {
@@ -77,7 +78,7 @@ namespace OpusOneServer.Controllers
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
         {
-            User u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
+            User? u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
 
             if(u != null)
             {
@@ -100,7 +101,7 @@ namespace OpusOneServer.Controllers
                 context.Users.Add(user);
                 await context.SaveChangesAsync();
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw new Exception("Register error");
             }
