@@ -9,7 +9,7 @@ public partial class User
 
     public string Username { get; set; } = null!;
 
-    public string Pwsd { get; set; } = null!;
+    public string Password { get; set; } = null!;
 
     public string Email { get; set; } = null!;
 
@@ -21,5 +21,5 @@ public partial class User
 
     public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
 
-   public virtual ICollection<WorksUser> WorksUsers { get; set; } = new List<WorksUser>();
+    public virtual ICollection<WorksUser> WorksUsers { get; set; } = new List<WorksUser>();
 }

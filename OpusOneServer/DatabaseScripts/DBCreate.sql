@@ -1,4 +1,5 @@
 ﻿Use master
+
 Create Database OpusOneDB
 GO
 
@@ -73,7 +74,7 @@ GO
 Create Table Works_Users(
 	ID int IDENTITY PRIMARY KEY,
 	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
-	WorkID int NOT NULL FOREIGN KEY REFERENCES Users(Id),
+	WorkID int NOT NULL FOREIGN KEY REFERENCES Works(Id),
 )
 GO
 

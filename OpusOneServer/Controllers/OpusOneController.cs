@@ -77,8 +77,8 @@ namespace OpusOneServer.Controllers
         [Route(nameof(Login))]
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
-        {
-            User? u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Pwsd == user.Pwsd).FirstOrDefault();
+        {            
+            User? u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
 
             if(u != null)
             {

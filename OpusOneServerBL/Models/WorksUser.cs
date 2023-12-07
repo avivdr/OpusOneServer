@@ -12,4 +12,6 @@ public partial class WorksUser
     public int WorkId { get; set; }
 
     public virtual User User { get; set; } = null!;
+
+    public virtual Work Work { get; set; } = null!;
 }

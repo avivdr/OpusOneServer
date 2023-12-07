@@ -30,7 +30,7 @@
   <ItemGroup>
     <Folder Include="DatabaseScripts\" />
     <Folder Include="DTO\" />
-    <Folder Include="Wwwroot\" />
+    <Folder Include="Wwwroot\NewFolder\" />
   </ItemGroup>
 
 </Project>

@@ -6,12 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OpusOneServerBL.Models;
 
 public partial class Post
 {
+    [NotMapped]
     [JsonIgnore]
-    public FileStream? File { get; set; }
+    public FileStream File { get; set; }
 }
 
