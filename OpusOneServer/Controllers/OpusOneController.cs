@@ -1,8 +1,9 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OpusOneServerBL.Models;
 using System.Text.Json;
+using OpusOneServerBL.Models;
 using System.IO;
+using OpusOneServerBL.OpenOpusService;
 
 namespace OpusOneServer.Controllers
 {
@@ -10,11 +11,13 @@ namespace OpusOneServer.Controllers
     [ApiController]
     public class OpusOneController : ControllerBase
     {
-        #region Add connection to the db context using dependency injection
+        #region dependency injection
         OpusOneDbContext context;
-        public OpusOneController(OpusOneDbContext context)
+        readonly OpenOpusService service;
+        public OpusOneController(OpusOneDbContext context, OpenOpusService _service)
         {
             this.context = context;
+           service = _service;
         }
         #endregion
 
@@ -31,6 +34,19 @@ namespace OpusOneServer.Controllers
         public async Task<ActionResult<List<Post>>> GetPosts()
         {
             return Ok(context.Posts.ToList());
+        }
+
+        [Route(nameof(SearchComposerByName))]
+        [HttpGet]
+        public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromQuery] string query)
+        {          
+            List<Composer>? composers = await service.SearchComposerByName(query);
+            if (composers != null)
+            {
+                return Ok(composers);
+            }            
+
+            return BadRequest();
         }
 
         [Route(nameof(UploadPost))]
@@ -74,6 +90,8 @@ namespace OpusOneServer.Controllers
             }
         }
 
+        #region Login + Register
+
         [Route(nameof(Login))]
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
@@ -109,5 +127,6 @@ namespace OpusOneServer.Controllers
             HttpContext.Session.SetObject("user", user);
             return Ok();
         }
+        #endregion
     }
 }

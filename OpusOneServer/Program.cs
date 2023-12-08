@@ -1,7 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using OpusOneServerBL.Models;
+using OpusOneServerBL.MusicModels;
 using Microsoft.EntityFrameworkCore;
+using OpusOneServerBL.OpenOpusService;
 
 namespace OpusOneServer
 {
@@ -17,6 +19,8 @@ namespace OpusOneServer
             string connection = builder.Configuration.GetConnectionString("OpusOneDB");
             builder.Services.AddDbContext<OpusOneDbContext>(options => options.UseSqlServer(connection));
             #endregion
+
+            builder.Services.AddScoped<OpenOpusService>();
 
             builder.Services.AddControllers().AddJsonOptions(o => o.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve);
             ;
