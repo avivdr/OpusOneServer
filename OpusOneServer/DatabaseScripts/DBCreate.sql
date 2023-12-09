@@ -13,7 +13,6 @@ Create Table Users (
 	Email nvarchar(100) NOT NULL,
 	CONSTRAINT UC_Username UNIQUE(Username)
 )
-GO
 
 
 Create Table Posts(
@@ -22,10 +21,10 @@ Create Table Posts(
 	Title nvarchar(100) NOT NULL,
 	Content nvarchar(1000) ,
 	UploadDateTime datetime NOT NULL,
-	Work int,
-	Composer int,
+	Work int FOREIGN KEY REFERENCES Works(Id),
+	Composer int FOREIGN KEY REFERENCES Composer(Id),
 )
-GO
+
 
 Create Table Comments(
 	ID int IDENTITY PRIMARY KEY,
@@ -34,7 +33,7 @@ Create Table Comments(
 	Content nvarchar(1000) NOT NULL,
 	UploadDateTime datetime NOT NULL,
 )
-GO
+
 
 Create Table Forums(
 	ID int IDENTITY PRIMARY KEY,
@@ -42,10 +41,10 @@ Create Table Forums(
 	ForumDescription nvarchar(255) NOT NULL,
 	CreatorID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 	CreatedDateTime datetime NOT NULL,	
-	Work int,
-	Composer int,
+	Work int FOREIGN KEY REFERENCES Works(Id),
+	Composer int FOREIGN KEY REFERENCES Composers(Id),
 )
-GO
+
 
 Create Table ForumComment(
 	ID int IDENTITY PRIMARY KEY,
@@ -54,14 +53,14 @@ Create Table ForumComment(
 	Content nvarchar(1000) NOT NULL,
 	UploadDateTime datetime NOT NULL,
 )
-GO
+
 
 Create Table Composers(
 	Id int PRIMARY KEY NOT NULL,
 	[Name] varchar(255) NOT NULL,
 	Complete_Name varchar(255) NOT NULL,
 )
-GO
+
 
 Create Table Works(
 	Id int PRIMARY KEY NOT NULL,
@@ -69,13 +68,14 @@ Create Table Works(
 	Title nvarchar(255) NOT NULL,
 	Genre tinyint NOT NULL,
 )
-GO
+
 
 Create Table Works_Users(
 	ID int IDENTITY PRIMARY KEY,
 	UserID int NOT NULL FOREIGN KEY REFERENCES Users(ID),
 	WorkID int NOT NULL FOREIGN KEY REFERENCES Works(Id),
 )
+
 GO
 
 INSERT INTO Users Values('kiki123', '12345', 'kiki@gmail.com');
