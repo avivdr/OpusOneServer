@@ -75,13 +75,16 @@ namespace OpusOneServerBL.OpenOpusService
 
         public async Task<List<Composer>?> SearchComposerByName(string query)
         {
+            if (query.Length < 4)
+                return null;
+
             try
             {
                 var response = await httpClient.GetAsync($@"{URL}/composer/list/search/{query}.json");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
-                    var result = JsonSerializer.Deserialize<ComposerResult>(content);
+                    var result = JsonSerializer.Deserialize<ComposerResult>(content, options);
                     if (result != null && result.Status.Success == "true")
                         return result.Composers;
                 }
