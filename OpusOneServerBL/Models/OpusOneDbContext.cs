@@ -39,7 +39,7 @@ public partial class OpusOneDbContext : DbContext
     {
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC2792A12639");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC27BAF15A83");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -60,7 +60,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Composer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Composer__3214EC0738F5F4B2");
+            entity.HasKey(e => e.Id).HasName("PK__Composer__3214EC07524C7681");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.CompleteName)
@@ -74,7 +74,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC27134749C9");
+            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC2723D7B84A");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
@@ -90,7 +90,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<ForumComment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC270AB36D3C");
+            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC274B013090");
 
             entity.ToTable("ForumComment");
 
@@ -113,7 +113,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC271D6D1CAA");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC27DB427CEB");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -129,7 +129,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC27635F0734");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC27BAE13831");
 
             entity.HasIndex(e => e.Username, "UC_Username").IsUnique();
 
@@ -141,13 +141,10 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Work>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Works__3214EC07082CC0D8");
+            entity.HasKey(e => e.Id).HasName("PK__Works__3214EC07AA13AC40");
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.ComposerId).HasColumnName("Composer_Id");
-            entity.Property(e => e.Genre)
-                .HasMaxLength(255)
-                .IsUnicode(false);
             entity.Property(e => e.Title).HasMaxLength(255);
 
             entity.HasOne(d => d.Composer).WithMany(p => p.Works)
@@ -158,7 +155,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<WorksUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC27C1129E4C");
+            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC2795E91F16");
 
             entity.ToTable("Works_Users");
 
@@ -169,12 +166,12 @@ public partial class OpusOneDbContext : DbContext
             entity.HasOne(d => d.User).WithMany(p => p.WorksUsers)
                 .HasForeignKey(d => d.UserId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Works_Use__UserI__5812160E");
+                .HasConstraintName("FK__Works_Use__UserI__398D8EEE");
 
             entity.HasOne(d => d.Work).WithMany(p => p.WorksUsers)
                 .HasForeignKey(d => d.WorkId)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Works_Use__WorkI__59063A47");
+                .HasConstraintName("FK__Works_Use__WorkI__3A81B327");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -11,7 +11,7 @@ public partial class Work
 
     public string Title { get; set; } = null!;
 
-    public string Genre { get; set; } = null!;
+    public byte Genre { get; set; }
 
     public virtual Composer Composer { get; set; } = null!;
 

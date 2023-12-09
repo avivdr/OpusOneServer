@@ -67,7 +67,7 @@ Create Table Works(
 	Id int PRIMARY KEY NOT NULL,
 	Composer_Id int FOREIGN KEY REFERENCES Composers(Id) NOT NULL,
 	Title nvarchar(255) NOT NULL,
-	Genre varchar(255) NOT NULL,
+	Genre tinyint NOT NULL,
 )
 GO
 
