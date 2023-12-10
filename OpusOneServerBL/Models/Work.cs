@@ -15,5 +15,9 @@ public partial class Work
 
     public virtual Composer Composer { get; set; } = null!;
 
+    public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
+
+    public virtual ICollection<Post> Posts { get; set; } = new List<Post>();
+
     public virtual ICollection<WorksUser> WorksUsers { get; set; } = new List<WorksUser>();
 }

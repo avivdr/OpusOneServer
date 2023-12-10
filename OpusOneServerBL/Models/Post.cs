@@ -15,11 +15,15 @@ public partial class Post
 
     public DateTime UploadDateTime { get; set; }
 
-    public int? Work { get; set; }
+    public int? WorkId { get; set; }
 
-    public int? Composer { get; set; }
+    public int? ComposerId { get; set; }
 
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
+    public virtual Composer? Composer { get; set; }
+
     public virtual User Creator { get; set; } = null!;
+
+    public virtual Work? Work { get; set; }
 }

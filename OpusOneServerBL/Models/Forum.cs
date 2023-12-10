@@ -15,11 +15,15 @@ public partial class Forum
 
     public DateTime CreatedDateTime { get; set; }
 
-    public int? Work { get; set; }
+    public int? WorkId { get; set; }
 
-    public int? Composer { get; set; }
+    public int? ComposerId { get; set; }
+
+    public virtual Composer? Composer { get; set; }
 
     public virtual User Creator { get; set; } = null!;
 
     public virtual ICollection<ForumComment> ForumComments { get; set; } = new List<ForumComment>();
+
+    public virtual Work? Work { get; set; }
 }
