@@ -6,6 +6,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 using OpusOneServerBL.Models;
 using OpusOneServerBL.MusicModels;
 
@@ -93,5 +94,13 @@ namespace OpusOneServerBL.OpenOpusService
 
             return null;
         }
+
+        public async Task<List<Work>?> SearchComposersAndWorksByName(string query)
+        {
+            try
+            {
+
+            }
+        } 
     }
 }

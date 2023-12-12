@@ -62,6 +62,9 @@ namespace OpusOneServer.Controllers
 
             try
             {
+                await context.SaveComposer(p.Composer);
+                await context.SaveWork(p.Work);
+
                 p = context.Posts.Add(p).Entity;
                 await context.SaveChangesAsync();
             }
