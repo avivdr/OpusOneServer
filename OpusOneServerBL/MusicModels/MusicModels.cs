@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Identity.Client;
 using OpusOneServerBL.Models;
 
 namespace OpusOneServerBL.MusicModels
@@ -19,6 +20,7 @@ namespace OpusOneServerBL.MusicModels
     {
         public string Version { get; set; }
         public string Success { get; set; }
+        public string Error { get; set; }
         public string Source { get; set; }
         public int Rows { get; set; }
         public float ProcessingTime { get; set; }

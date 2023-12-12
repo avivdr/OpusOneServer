@@ -36,9 +36,9 @@ namespace OpusOneServer.Controllers
             return Ok(context.Posts.ToList());
         }
 
-        [Route(nameof(SearchComposerByName))]
+        [Route(nameof(SearchComposerByName) + "/{query}")]
         [HttpGet]
-        public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromQuery] string query)
+        public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromRoute] string query)
         {
             if (query.Length < 4)
                 return BadRequest();
@@ -47,7 +47,7 @@ namespace OpusOneServer.Controllers
             if (composers != null)
             {
                 return Ok(composers);
-            }            
+            }
 
             return BadRequest();
         }

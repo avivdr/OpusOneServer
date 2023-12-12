@@ -86,21 +86,15 @@ namespace OpusOneServerBL.OpenOpusService
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var result = JsonSerializer.Deserialize<ComposerResult>(content, options);
-                    if (result != null && result.Status.Success == "true")
+                    if (result?.Status.Success == "true")
                         return result.Composers;
+                    if (result?.Status.Error == "No composers found")
+                        return new List<Composer>();
                 }
             }
             catch (Exception) { }
 
             return null;
         }
-
-        public async Task<List<Work>?> SearchComposersAndWorksByName(string query)
-        {
-            try
-            {
-
-            }
-        } 
     }
 }
