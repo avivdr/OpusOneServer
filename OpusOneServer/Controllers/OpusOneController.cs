@@ -36,6 +36,7 @@ namespace OpusOneServer.Controllers
             return Ok(context.Posts.ToList());
         }
 
+
         [Route(nameof(SearchComposerByName) + "/{query}")]
         [HttpGet]
         public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromRoute] string query)
@@ -52,16 +53,18 @@ namespace OpusOneServer.Controllers
             return BadRequest();
         }
 
+
         [Route(nameof(UploadPost))]
         [HttpPost]
         public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile file)
         {
-            Post? p = JsonSerializer.Deserialize<Post>(post);
-            if (p == null)
-                return BadRequest();
-
+            Post? p;
             try
             {
+                p = JsonSerializer.Deserialize<Post>(post);
+                if (p == null)
+                    return BadRequest();
+
                 await context.SaveComposer(p.Composer);
                 await context.SaveWork(p.Work);
 
