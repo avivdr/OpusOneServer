@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using OpusOneServerBL.Models;
 using System.IO;
 using OpusOneServerBL.OpenOpusService;
@@ -14,10 +15,15 @@ namespace OpusOneServer.Controllers
         #region dependency injection
         OpusOneDbContext context;
         readonly OpenOpusService service;
+        readonly JsonSerializerOptions options;
         public OpusOneController(OpusOneDbContext context, OpenOpusService _service)
         {
             this.context = context;
-           service = _service;
+            service = _service;
+            options = new JsonSerializerOptions()
+            {
+                ReferenceHandler = ReferenceHandler.Preserve
+            };
         }
         #endregion
 
@@ -61,14 +67,14 @@ namespace OpusOneServer.Controllers
             Post? p;
             try
             {
-                p = JsonSerializer.Deserialize<Post>(post);
+                p = JsonSerializer.Deserialize<Post>(post, options);
                 if (p == null)
                     return BadRequest();
 
                 await context.SaveComposer(p.Composer);
                 await context.SaveWork(p.Work);
 
-                p = context.Posts.Add(p).Entity;
+                context.Posts.Add(p);
                 await context.SaveChangesAsync();
             }
             catch (Exception)
