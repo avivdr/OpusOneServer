@@ -9,9 +9,25 @@ namespace OpusOneServerBL.Models;
 
 public partial class OpusOneDbContext
 {
-    public IEnumerable<User> GetUserWithData()
+    public IEnumerable<User> GetUsersWithData()
     {
         return Users.Include(x => x.Posts).Include(x => x.Comments).Include(x => x.ForumComments).Include(x => x.Forums).Include(x => x.WorksUsers);
+    }
+
+    public IEnumerable<Post> GetPostsWithData()
+    {
+        return Posts.Include(x => x.Creator).Include(x => x.Work).Include(x => x.Comments).Include(x => x.Composer);
+    }
+
+    public Post LoadPost(Post post)
+    {
+        var creator = Users.FirstOrDefault(x => x.Id == post.Creator.Id);
+        if (creator != null)
+            post.Creator = creator;
+
+        var composer = Composers.FirstOrDefault(x => x.Id == post.Composer.Id);
+        if (composer != null)
+            post.Creator = composer;
     }
 
     public async Task SaveComposer(Composer composer)

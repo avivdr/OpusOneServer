@@ -74,6 +74,7 @@ namespace OpusOneServer.Controllers
                 await context.SaveComposer(p.Composer);
                 await context.SaveWork(p.Work);
 
+                
                 context.Posts.Add(p);
                 await context.SaveChangesAsync();
             }
@@ -111,7 +112,7 @@ namespace OpusOneServer.Controllers
         [HttpPost]  
         public async Task<ActionResult<User>> Login([FromBody] User user)
         {            
-            User? u = context.GetUserWithData().Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
+            User? u = context.GetUsersWithData().Where(x => x.Username == user.Username && x.Password == user.Password).FirstOrDefault();
 
             if(u != null)
             {
