@@ -35,14 +35,6 @@ namespace OpusOneServer.Controllers
             return Ok("hi");
         }
 
-        [Route(nameof(GetPosts))]
-        [HttpGet]
-        public async Task<ActionResult<List<Post>>> GetPosts()
-        {
-            return Ok(context.Posts.ToList());
-        }
-
-
         [Route(nameof(SearchComposerByName) + "/{query}")]
         [HttpGet]
         public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromRoute] string query)
@@ -62,19 +54,26 @@ namespace OpusOneServer.Controllers
 
         [Route(nameof(UploadPost))]
         [HttpPost]
-        public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile file)
+        public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile? file = null)
         {
             Post? p;
             try
             {
                 p = JsonSerializer.Deserialize<Post>(post, options);
+
                 if (p == null)
                     return BadRequest();
 
-                await context.SaveComposer(p.Composer);
-                await context.SaveWork(p.Work);
+                if (p.Creator == null || 
+                    (p != null && !context.Users.Any(x => x.Username == p.Creator.Username)))
+                    return Unauthorized();
 
-                
+                if (p.Work != null && context.Works.Any(x => x.Id == p.Work.Id))
+                    context.Works.Attach(p.Work);
+                if (p.Composer != null && context.Composers.Any(x => x.Id == p.Composer.Id))
+                    context.Composers.Attach(p.Composer);
+                context.Users.Attach(p.Creator);
+
                 context.Posts.Add(p);
                 await context.SaveChangesAsync();
             }
@@ -90,19 +89,20 @@ namespace OpusOneServer.Controllers
             if (!Directory.Exists(newFolderPath))            
                 Directory.CreateDirectory(newFolderPath);
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString(), Path.GetExtension(file.FileName));
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString() + Path.GetExtension(file.FileName));
 
-            using (var fileStream = new FileStream(path, FileMode.Create))
+            try
             {
-                try
-                {
-                    file.CopyTo(fileStream);
-                    return Ok();
-                }
-                catch (Exception)
-                {
-                    return BadRequest();
-                }
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                
+                file.CopyTo(fileStream);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                context.Posts.Remove(p);
+                await context.SaveChangesAsync();
+                return BadRequest();
             }
         }
 
