@@ -5,6 +5,7 @@ using System.Text.Json.Serialization;
 using OpusOneServerBL.Models;
 using System.IO;
 using OpusOneServerBL.OpenOpusService;
+using OpusOneServerBL.MusicModels;
 
 namespace OpusOneServer.Controllers
 {
@@ -49,6 +50,13 @@ namespace OpusOneServer.Controllers
             }
 
             return BadRequest();
+        }
+
+        [Route(nameof(OmniSearch) + "/{query}/{offset}")]
+        [HttpGet]
+        public async Task<ActionResult<OmniSearchResult>> OmniSearch([FromRoute] string query, [FromRoute] int offset)
+        {
+
         }
 
 
@@ -127,7 +135,7 @@ namespace OpusOneServer.Controllers
         [HttpPost]
         public async Task<ActionResult> Register([FromBody] User user)
         {
-            if (context.Users.FirstOrDefault(u => u.Username == user.Username) != null)
+            if (context.Users.Any(x => x.Username == user.Username))
                 return Conflict();
 
             try

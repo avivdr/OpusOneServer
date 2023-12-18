@@ -74,6 +74,30 @@ namespace OpusOneServerBL.OpenOpusService
             };
         }
 
+        public async Task<OmniSearchResult?> OmniSearch(string query, int offset)
+        {
+            if (query.Length < 3)
+                return null;
+
+            try
+            {
+                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/{offset}.json");
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<OmniSearchResult>(content, options);
+
+                    if (result?.Status.Success == "true")
+                    {
+                        throw new NotImplementedException();
+                    }
+                }
+            }
+            catch (Exception) { }
+
+            return null;
+        } 
+
         public async Task<List<Composer>?> SearchComposerByName(string query)
         {
             if (query.Length < 4)
@@ -86,6 +110,7 @@ namespace OpusOneServerBL.OpenOpusService
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var result = JsonSerializer.Deserialize<ComposerResult>(content, options);
+
                     if (result?.Status.Success == "true")
                         return result.Composers;
                     if (result?.Status.Error == "No composers found")
