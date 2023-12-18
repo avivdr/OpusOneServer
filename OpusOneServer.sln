@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusOneServer", "OpusOneServer\OpusOneServer.csproj", "{010C7AA1-6C36-4188-A1A3-47899F91E169}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusOneServer", "OpusOneServer\OpusOneServer.csproj", "{010C7AA1-6C36-4188-A1A3-47899F91E169}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusOneServerBL", "OpusOneServerBL\OpusOneServerBL.csproj", "{3C000710-0BA6-497E-9E71-EE8FAF5E315E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusOneServerBL", "OpusOneServerBL\OpusOneServerBL.csproj", "{3C000710-0BA6-497E-9E71-EE8FAF5E315E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

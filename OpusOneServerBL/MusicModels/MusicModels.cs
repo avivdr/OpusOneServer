@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Identity.Client;
 using OpusOneServerBL.Models;
@@ -55,7 +56,9 @@ namespace OpusOneServerBL.MusicModels
     {
         public Status Status { get; set; }
         public Request Request { get; set; }
-        public List<OmniSearchItem> Results { get; set; }
+
+        [JsonPropertyName("Results")]
+        public List<OmniSearchItem> Items { get; set; }
         public int Next { get; set; }
     }
 

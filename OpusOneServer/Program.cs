@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 using OpusOneServerBL.Models;
 using OpusOneServerBL.MusicModels;
 using Microsoft.EntityFrameworkCore;
-using OpusOneServerBL.OpenOpusService;
+using OpusOneServer.Service;
 
 namespace OpusOneServer
 {

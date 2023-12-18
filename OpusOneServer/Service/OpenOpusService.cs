@@ -7,11 +7,12 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using Microsoft.Identity.Client;
+using OpusOneServer.DTO;
 using OpusOneServerBL.Models;
 using OpusOneServerBL.MusicModels;
 
 
-namespace OpusOneServerBL.OpenOpusService
+namespace OpusOneServer.Service
 {
     public class OpenOpusService
     {
@@ -74,7 +75,7 @@ namespace OpusOneServerBL.OpenOpusService
             };
         }
 
-        public async Task<OmniSearchResult?> OmniSearch(string query, int offset)
+        public async Task<List<OmniSearchDTO>?> OmniSearch(string query, int offset)
         {
             if (query.Length < 3)
                 return null;
@@ -87,16 +88,16 @@ namespace OpusOneServerBL.OpenOpusService
                     var content = await response.Content.ReadAsStringAsync();
                     var result = JsonSerializer.Deserialize<OmniSearchResult>(content, options);
 
-                    if (result?.Status.Success == "true")
+                    if (result?.Status?.Success == "true")
                     {
-                        throw new NotImplementedException();
+
                     }
                 }
             }
             catch (Exception) { }
 
             return null;
-        } 
+        }
 
         public async Task<List<Composer>?> SearchComposerByName(string query)
         {
