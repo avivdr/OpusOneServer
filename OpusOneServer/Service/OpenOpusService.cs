@@ -90,7 +90,7 @@ namespace OpusOneServer.Service
 
                     if (result?.Status?.Success == "true")
                     {
-                        result.ToOmniSearchDTO();
+                        return result.ToOmniSearchDTO();
                     }
                 }
             }

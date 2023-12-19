@@ -13,6 +13,7 @@ public partial class Work
 
     public string Title { get; set; } = null!;
 
+    [JsonIgnore]
     public byte Genre { get; set; }
 
     public virtual Composer Composer { get; set; } = null!;

@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace OpusOneServerBL.Models
@@ -23,6 +25,7 @@ namespace OpusOneServerBL.Models
         [NotMapped]
         public string Subtitle { get; set; }
         [NotMapped]
+        [JsonIgnore]
         public List<string> SearchTerms { get; set; }
         [NotMapped]
         public string Popular { get; set; }
