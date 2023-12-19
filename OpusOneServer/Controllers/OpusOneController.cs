@@ -6,6 +6,8 @@ using OpusOneServerBL.Models;
 using System.IO;
 using OpusOneServer.Service;
 using OpusOneServerBL.MusicModels;
+using OpusOneServer.DTO;
+using Microsoft.IdentityModel.Tokens;
 
 namespace OpusOneServer.Controllers
 {
@@ -45,18 +47,24 @@ namespace OpusOneServer.Controllers
 
             List<Composer>? composers = await service.SearchComposerByName(query);
             if (composers != null)
-            {
                 return Ok(composers);
-            }
 
             return BadRequest();
         }
 
+
         [Route(nameof(OmniSearch) + "/{query}/{offset}")]
         [HttpGet]
-        public async Task<ActionResult<OmniSearchResult>> OmniSearch([FromRoute] string query, [FromRoute] int offset)
+        public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query, [FromRoute] int offset = 0)
         {
+            if (string.IsNullOrEmpty(query) || query.Length < 3) 
+                return BadRequest();
 
+            OmniSearchDTO? omniSearchDTO = await service.OmniSearch(query, offset);
+            if (omniSearchDTO != null)
+                return Ok(omniSearchDTO);
+
+            return BadRequest();
         }
 
 

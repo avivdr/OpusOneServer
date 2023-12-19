@@ -75,7 +75,7 @@ namespace OpusOneServer.Service
             };
         }
 
-        public async Task<List<OmniSearchDTO>?> OmniSearch(string query, int offset)
+        public async Task<OmniSearchDTO?> OmniSearch(string query, int offset = 0)
         {
             if (query.Length < 3)
                 return null;
@@ -90,7 +90,7 @@ namespace OpusOneServer.Service
 
                     if (result?.Status?.Success == "true")
                     {
-
+                        result.ToOmniSearchDTO();
                     }
                 }
             }

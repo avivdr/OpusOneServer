@@ -6,8 +6,7 @@ namespace OpusOneServer.DTO
     {
         public static OmniSearchDTO ToOmniSearchDTO(this OmniSearchResult omniSearchResult)
         {
-            if (omniSearchResult == null ||
-                omniSearchResult.Status == null || 
+            if (omniSearchResult.Status == null || 
                 omniSearchResult.Status?.Success != "true")
                 return null;
 
