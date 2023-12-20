@@ -24,9 +24,8 @@ namespace OpusOneServerBL.Models
     {
         [NotMapped]
         public string Subtitle { get; set; }
-        [NotMapped]
-        [JsonIgnore]
-        public List<string> SearchTerms { get; set; }
+        //[NotMapped]
+        //public List<string> SearchTerms { get; set; }
         [NotMapped]
         public string Popular { get; set; }
         [NotMapped]
@@ -36,6 +35,7 @@ namespace OpusOneServerBL.Models
         [NotMapped]
         public string Catalogue { get; set; }
         [NotMapped]
-        public string Catalogue_Number { get; set; }
+        [JsonPropertyName("Catalogue_Number")]
+        public string CatalogueNumber { get; set; }
     }
 }
