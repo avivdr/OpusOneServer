@@ -13,6 +13,7 @@ public partial class Work
 
     public string Title { get; set; } = null!;
 
+    //add converter from string
     [JsonIgnore]
     public byte Genre { get; set; }
 
