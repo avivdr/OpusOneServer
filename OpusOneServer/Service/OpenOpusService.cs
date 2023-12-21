@@ -64,7 +64,7 @@ namespace OpusOneServer.Service
         readonly HttpClient httpClient;
         const string URL = @"https://api.openopus.org";
         readonly JsonSerializerOptions options;
-        private OmniSearchSession omniSearchSession;
+        private OmniSearchSession? omniSearchSession;
 
         public OpenOpusService()
         {
@@ -77,14 +77,14 @@ namespace OpusOneServer.Service
             };
         }
 
-        public async Task<OmniSearchDTO?> OmniSearch(string query, int offset = 0)
+        public async Task<OmniSearchDTO?> OmniSearch(string query)
         {
             if (query.Length < 3)
                 return null;
 
             try
             {
-                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/{offset}.json");
+                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/0.json");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
