@@ -12,9 +12,9 @@ namespace OpusOneServerBL.Models
     public partial class Composer
     {
         [NotMapped]
-        public DateOnly Birth { get; set; }
+        public DateTime Birth { get; set; }
         [NotMapped]
-        public DateOnly Death { get; set; }
+        public DateTime? Death { get; set; }
         [NotMapped]
         public string Epoch { get; set; }
         [NotMapped]

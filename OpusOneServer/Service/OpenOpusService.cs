@@ -10,6 +10,7 @@ using Microsoft.Identity.Client;
 using OpusOneServer.DTO;
 using OpusOneServerBL.Models;
 using OpusOneServerBL.MusicModels;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 
 namespace OpusOneServer.Service
@@ -63,6 +64,7 @@ namespace OpusOneServer.Service
         readonly HttpClient httpClient;
         const string URL = @"https://api.openopus.org";
         readonly JsonSerializerOptions options;
+        private OmniSearchSession omniSearchSession;
 
         public OpenOpusService()
         {
@@ -90,6 +92,33 @@ namespace OpusOneServer.Service
 
                     if (result?.Status?.Success == "true")
                     {
+                        omniSearchSession = new() { Query = query, Next = result.Next };
+                        return result.ToOmniSearchDTO();
+                    }
+                }
+            }
+            catch (Exception) { }
+
+            return null;
+        }
+
+        public async Task<OmniSearchDTO?> NextOmniSearch()
+        {
+            if (omniSearchSession == null || omniSearchSession.Next == 0)
+                return null;
+
+            try
+            {
+                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{omniSearchSession.Query}/{omniSearchSession.Next}.json");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var content = await response.Content.ReadAsStringAsync();
+                    var result = JsonSerializer.Deserialize<OmniSearchResult>(content, options);
+
+                    if (result?.Status?.Success == "true")
+                    {
+                        omniSearchSession.Next = result.Next;
                         return result.ToOmniSearchDTO();
                     }
                 }

@@ -95,6 +95,11 @@ Alter Table Works_Users Add CONSTRAINT FK_Works_Users_UserID FOREIGN KEY (UserID
 
 GO
 
+--Composers
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (80, N'Brahms', N'Johannes Brahms')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart')
+
 --Users
 SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (1, N'kiki123', N'12345', N'kiki@gmail.com')
@@ -106,11 +111,6 @@ SET IDENTITY_INSERT [dbo].[Users] OFF
 SET IDENTITY_INSERT [dbo].[Posts] ON
 INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (14, 1, N'brahms post', N'brahms is c composers', N'2023-12-16 15:56:19', NULL, 80)
 SET IDENTITY_INSERT [dbo].[Posts] OFF
-
---Composers
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (80, N'Brahms', N'Johannes Brahms')
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven')
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart')
 
 GO
 

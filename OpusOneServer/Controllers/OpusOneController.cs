@@ -84,11 +84,7 @@ namespace OpusOneServer.Controllers
                     (p != null && !context.Users.Any(x => x.Username == p.Creator.Username)))
                     return Unauthorized();
 
-                if (p.Work != null && context.Works.Any(x => x.Id == p.Work.Id))
-                    context.Works.Attach(p.Work);
-                if (p.Composer != null && context.Composers.Any(x => x.Id == p.Composer.Id))
-                    context.Composers.Attach(p.Composer);
-                context.Users.Attach(p.Creator);
+                context.AttachPostData(p);
 
                 context.Posts.Add(p);
                 await context.SaveChangesAsync();
@@ -141,7 +137,7 @@ namespace OpusOneServer.Controllers
 
         [Route(nameof(Register))]
         [HttpPost]
-        public async Task<ActionResult> Register([FromBody] User user)
+        public async Task<ActionResult<User>> Register([FromBody] User user)
         {
             if (context.Users.Any(x => x.Username == user.Username))
                 return Conflict();
@@ -157,7 +153,7 @@ namespace OpusOneServer.Controllers
             }
 
             HttpContext.Session.SetObject("user", user);
-            return Ok();
+            return Ok(user);
         }
         #endregion
     }
