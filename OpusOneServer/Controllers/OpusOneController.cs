@@ -54,7 +54,7 @@ namespace OpusOneServer.Controllers
         }
 
 
-        [Route(nameof(OmniSearch) + "/{query}/{offset}")]
+        [Route(nameof(OmniSearch) + "/{query}")]
         [HttpGet]
         public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query)
         {
