@@ -16,6 +16,9 @@ namespace OpusOneServer.Controllers
     [ApiController]
     public class OpusOneController : ControllerBase
     {
+        const string OmniSearchKey_Next = "OmniSearch_Next";
+        const string OmniSearchKey_Query = "OmniSearch_Query";
+
         #region dependency injection
         OpusOneDbContext context;
         readonly OpenOpusService service;
@@ -56,27 +59,41 @@ namespace OpusOneServer.Controllers
 
         [Route(nameof(OmniSearch) + "/{query}")]
         [HttpGet]
-        public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query)
+        public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query, int next = 0)
         {
             if (string.IsNullOrEmpty(query) || query.Length < 3) 
                 return BadRequest();
 
-            OmniSearchDTO? omniSearchDTO = await service.OmniSearch(query);
-            if (omniSearchDTO != null)
-                return Ok(omniSearchDTO);
+            OmniSearchDTO? result = await service.OmniSearch(query, next);
+            if (result == null)
+                return BadRequest();
 
-            return BadRequest();
+            HttpContext.Session.SetString(OmniSearchKey_Query, query);
+            HttpContext.Session.SetInt32(OmniSearchKey_Next, result.Next);
+
+            return Ok(result);
         }
 
         [Route(nameof(NextOmniSearch))]
         [HttpGet]
         public async Task<ActionResult<OmniSearchDTO>> NextOmniSearch()
         {
-            OmniSearchDTO? omniSearchDTO = await service.NextOmniSearch();
-            if (omniSearchDTO != null)
-                return Ok(omniSearchDTO);
+            string? query;
+            int? next;
+            try
+            {
+                query = HttpContext.Session.GetString(OmniSearchKey_Query);
+                next = HttpContext.Session.GetInt32(OmniSearchKey_Next);
 
-            return BadRequest();
+                if (next == null || next == 0 || query == null)
+                    return BadRequest();
+
+                return await OmniSearch(query, (int)next);
+            }
+            catch(Exception)
+            {
+                return BadRequest();
+            }
         }
 
 
@@ -140,7 +157,7 @@ namespace OpusOneServer.Controllers
 
             if(u != null)
             {
-                HttpContext.Session.SetObject("user", u); 
+                HttpContext.Session.SetObject("user", u);;
                 return Ok(u);
             }
 

@@ -77,14 +77,14 @@ namespace OpusOneServer.Service
             };
         }
 
-        public async Task<OmniSearchDTO?> OmniSearch(string query)
+        public async Task<OmniSearchDTO?> OmniSearch(string query, int next = 0)
         {
             if (query.Length < 3)
                 return null;
 
             try
             {
-                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/0.json");
+                var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/{next}.json");
                 if (response.IsSuccessStatusCode)
                 {
                     var content = await response.Content.ReadAsStringAsync();
@@ -92,7 +92,6 @@ namespace OpusOneServer.Service
 
                     if (result?.Status?.Success == "true")
                     {
-                        omniSearchSession = new() { Query = query, Next = result.Next };
                         return result.ToOmniSearchDTO();
                     }
                 }

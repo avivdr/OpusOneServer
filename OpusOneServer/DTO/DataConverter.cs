@@ -12,6 +12,7 @@ namespace OpusOneServer.DTO
 
             OmniSearchDTO omniSearchDTO = new()
             {
+                Next = omniSearchResult.Next,
                 Composers = new(),
                 Works = new(),
             }; 
