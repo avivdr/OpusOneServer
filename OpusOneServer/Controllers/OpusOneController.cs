@@ -57,9 +57,9 @@ namespace OpusOneServer.Controllers
         }
 
 
-        [Route(nameof(OmniSearch) + "/{query}")]
+        [Route(nameof(OmniSearch) + "/{query}/{next}")]
         [HttpGet]
-        public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query, int next = 0)
+        public async Task<ActionResult<OmniSearchDTO>> OmniSearch([FromRoute] string query, [FromRoute] int next = 0)
         {
             if (string.IsNullOrEmpty(query) || query.Length < 3) 
                 return BadRequest();
