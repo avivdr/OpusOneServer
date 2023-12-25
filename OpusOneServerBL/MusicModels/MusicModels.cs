@@ -29,7 +29,7 @@ namespace OpusOneServerBL.MusicModels
     }
 
    
-    #region Requests
+    #region Results
     public class ComposerResult
     {
         public Status Status { get; set; }
@@ -52,7 +52,7 @@ namespace OpusOneServerBL.MusicModels
         public List<Work> Works { get; set; }
     }
 
-    public class OmniSearchResult
+    public partial class OmniSearchResult
     {
         public Status Status { get; set; }
         public Request Request { get; set; }
