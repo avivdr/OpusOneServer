@@ -97,8 +97,12 @@ GO
 
 --Composers
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (80, N'Brahms', N'Johannes Brahms')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (87, N'Bach', N'Johann Sebastian Bach')
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven')
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart')
+
+--Works
+INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title], [Genre]) VALUES (9334, 87, N'Cantata no. 140, "Wachet auf, ruft uns die Stimme", BWV.140', 0)
 
 --Users
 SET IDENTITY_INSERT [dbo].[Users] ON
@@ -110,7 +114,10 @@ SET IDENTITY_INSERT [dbo].[Users] OFF
 --Posts
 SET IDENTITY_INSERT [dbo].[Posts] ON
 INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (14, 1, N'brahms post', N'brahms is c composers', N'2023-12-16 15:56:19', NULL, 80)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (16, 1, N'pe n', N'peni', N'2024-01-04 11:57:22', 9334, NULL)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (17, 4, N'yale ararairr', N'yael', N'2024-01-04 11:59:38', NULL, NULL)
 SET IDENTITY_INSERT [dbo].[Posts] OFF
+
 
 GO
 
