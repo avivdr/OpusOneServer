@@ -109,14 +109,17 @@ SET IDENTITY_INSERT [dbo].[Users] ON
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (1, N'kiki123', N'12345', N'kiki@gmail.com')
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (2, N'kaka321', N'6969', N'kaka@kaka')
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (3, N'vulu', N'31415', N'vulu@gmail')
+INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (4, N'darkgoomer', N'mevichdor', N'darkgoomer@gmail.com')
 SET IDENTITY_INSERT [dbo].[Users] OFF
+
 
 --Posts
 SET IDENTITY_INSERT [dbo].[Posts] ON
 INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (14, 1, N'brahms post', N'brahms is c composers', N'2023-12-16 15:56:19', NULL, 80)
 INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (16, 1, N'pe n', N'peni', N'2024-01-04 11:57:22', 9334, NULL)
-INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (17, 4, N'yale ararairr', N'yael', N'2024-01-04 11:59:38', NULL, NULL)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (18, 4, N'masterpeice', N'the best post ever', N'2024-01-08 11:29:06', NULL, NULL)
 SET IDENTITY_INSERT [dbo].[Posts] OFF
+
 
 
 GO
