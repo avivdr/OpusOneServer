@@ -81,7 +81,7 @@ namespace OpusOneServer.Service
         {
             if (query.Length < 3)
                 return null;
-
+             
             try
             {
                 var response = await httpClient.GetAsync($@"{URL}/omnisearch/{query}/{next}.json");
@@ -89,11 +89,8 @@ namespace OpusOneServer.Service
                 {
                     var content = await response.Content.ReadAsStringAsync();
                     var result = JsonSerializer.Deserialize<OmniSearchResult>(content, options);
-
-                    if (result?.Status?.Success == "true")
-                    {
-                        return result.ToOmniSearchDTO();
-                    }
+                  
+                    return result?.ToOmniSearchDTO();
                 }
             }
             catch (Exception) { }
