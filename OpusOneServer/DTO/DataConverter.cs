@@ -6,7 +6,7 @@ namespace OpusOneServer.DTO
     {
         public static OmniSearchDTO ToOmniSearchDTO(this OmniSearchResult omniSearchResult)
         {
-            if (omniSearchResult.Status == null)
+            if (omniSearchResult == null || omniSearchResult.Status == null)
                 return null;
 
             OmniSearchDTO omniSearchDTO = new()
@@ -15,6 +15,9 @@ namespace OpusOneServer.DTO
                 Composers = new(),
                 Works = new(),
             };
+
+            if (omniSearchResult.Items == null)
+                return omniSearchDTO;
 
             foreach (var item in omniSearchResult.Items)
             {
