@@ -7,8 +7,6 @@ using System.IO;
 using OpusOneServer.Service;
 using OpusOneServerBL.MusicModels;
 using OpusOneServer.DTO;
-using Microsoft.IdentityModel.Tokens;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace OpusOneServer.Controllers
 {
