@@ -54,6 +54,7 @@ namespace OpusOneServer.Controllers
             return BadRequest();
         }
 
+        #region OmniSearch
 
         [Route(nameof(OmniSearch) + "/{query}/{next}")]
         [HttpGet]
@@ -94,6 +95,7 @@ namespace OpusOneServer.Controllers
             }
         }
 
+        #endregion
 
         [Route(nameof(UploadPost))]
         [HttpPost]
