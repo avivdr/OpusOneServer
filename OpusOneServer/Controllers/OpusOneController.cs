@@ -16,6 +16,7 @@ namespace OpusOneServer.Controllers
     {
         const string OmniSearchKey_Next = "OmniSearch_Next";
         const string OmniSearchKey_Query = "OmniSearch_Query";
+        const string UserKey = "User";
 
         #region dependency injection
         OpusOneDbContext context;
@@ -109,8 +110,12 @@ namespace OpusOneServer.Controllers
                 if (p == null)
                     return BadRequest();
 
-                if (p.Creator == null || 
-                    (p != null && !context.Users.Any(x => x.Username == p.Creator.Username)))
+                //if (p.Creator == null ||
+                //    (p != null && !context.Users.Any(x => x.Username == p.Creator.Username)))
+                //    return Unauthorized();
+
+                User? sessionUser = HttpContext.Session.GetObject<User>(UserKey);
+                if (p.Creator == null || sessionUser == null || p.Creator.Id != sessionUser.Id)
                     return Unauthorized();
 
                 context.AttachPostData(p);
@@ -157,7 +162,7 @@ namespace OpusOneServer.Controllers
 
             if(u != null)
             {
-                HttpContext.Session.SetObject("user", u);;
+                HttpContext.Session.SetObject(UserKey, u);;
                 return Ok(u);
             }
 
@@ -181,7 +186,7 @@ namespace OpusOneServer.Controllers
                 throw new Exception("Register error");
             }
 
-            HttpContext.Session.SetObject("user", user);
+            HttpContext.Session.SetObject(UserKey, user);
             return Ok(user);
         }
         #endregion
