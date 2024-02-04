@@ -98,6 +98,23 @@ namespace OpusOneServer.Controllers
 
         #endregion
 
+        [Route(nameof(GetPostFile) + "/{id}")]
+        [HttpGet]
+        public async Task<ActionResult> GetPostFile([FromRoute] int id)
+        {
+            string wwwRoot = Path.Combine(Directory.GetCurrentDirectory(), "Wwwroot");
+            string[] files = Directory.GetFiles(wwwRoot, id.ToString() + "*", SearchOption.AllDirectories);
+
+            if (files == null || files.Length == 0)
+                return NotFound();
+            if (files.Length > 1)
+                return Conflict();
+
+            Stream stream = System.IO.File.OpenRead(files[0]);
+
+            return File(stream, "application/octet-stream", Path.GetFileName(files[0]));
+        }
+
         [Route(nameof(UploadPost))]
         [HttpPost]
         public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile? file = null)
