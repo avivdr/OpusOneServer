@@ -107,14 +107,31 @@ namespace OpusOneServer.Controllers
 
             if (files == null || files.Length == 0)
                 return NotFound();
-            if (files.Length > 1)
-                return Conflict();
 
             Stream stream = System.IO.File.OpenRead(files[0]);
 
             return File(stream, "application/octet-stream", Path.GetFileName(files[0]));
         }
 
+        [Route(nameof(GetAllPosts))]
+        [HttpGet]
+        public async Task<ActionResult<List<Post>>> GetAllPosts()
+        {
+            return Ok(context.GetPostsWithData().OrderByDescending(x => x.UploadDateTime));
+        }
+
+        [Route(nameof(GetPostById) + "/{id}")]
+        [HttpGet]
+        public async Task<ActionResult<Post>> GetPostById([FromRoute] int id)
+        {
+            Post? post = context.GetPostsWithData().FirstOrDefault(x => x.Id == id);
+
+            if (post == null)
+                return NotFound();
+
+            return Ok(post);
+        }
+         
         [Route(nameof(UploadPost))]
         [HttpPost]
         public async Task<ActionResult> UploadPost([FromForm] string post, IFormFile? file = null)
@@ -126,10 +143,6 @@ namespace OpusOneServer.Controllers
 
                 if (p == null)
                     return BadRequest();
-
-                //if (p.Creator == null ||
-                //    (p != null && !context.Users.Any(x => x.Username == p.Creator.Username)))
-                //    return Unauthorized();
 
                 User? sessionUser = HttpContext.Session.GetObject<User>(UserKey);
                 if (p.Creator == null || sessionUser == null || p.Creator.Id != sessionUser.Id)
