@@ -15,6 +15,8 @@ public partial class Post
 
     public DateTime UploadDateTime { get; set; }
 
+    public string? FileExtention { get; set; }
+
     public int? WorkId { get; set; }
 
     public int? ComposerId { get; set; }

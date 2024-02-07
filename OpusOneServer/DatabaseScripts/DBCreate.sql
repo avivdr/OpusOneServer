@@ -20,6 +20,7 @@ Create Table Posts(
 	Title nvarchar(100) NOT NULL,
 	Content nvarchar(1000) ,
 	UploadDateTime datetime NOT NULL,
+	FileExtention varchar(55),
 	WorkId int,
 	ComposerId int
 )
@@ -115,9 +116,9 @@ SET IDENTITY_INSERT [dbo].[Users] OFF
 
 --Posts
 SET IDENTITY_INSERT [dbo].[Posts] ON
-INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (14, 1, N'brahms post', N'brahms is c composers', N'2023-12-16 15:56:19', NULL, 80)
-INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (16, 1, N'pe n', N'peni', N'2024-01-04 11:57:22', 9334, NULL)
-INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [WorkId], [ComposerId]) VALUES (18, 4, N'masterpeice', N'the best post ever', N'2024-01-08 11:29:06', NULL, NULL)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtention], [WorkId], [ComposerId]) VALUES (14, 1, N'brahms post', N'brahms is c composers', N'2023-12-16 15:56:19', '.jpg' ,NULL, 80)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtention], [WorkId], [ComposerId]) VALUES (16, 1, N'pe n', N'peni', N'2024-01-04 11:57:22', '.png', 9334, NULL)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtention], [WorkId], [ComposerId]) VALUES (18, 4, N'masterpeice', N'the best post ever', N'2024-01-08 11:29:06', '.png', NULL, NULL)
 SET IDENTITY_INSERT [dbo].[Posts] OFF
 
 

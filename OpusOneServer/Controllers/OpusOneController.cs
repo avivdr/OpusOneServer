@@ -146,11 +146,7 @@ namespace OpusOneServer.Controllers
             if (file == null || file.Length == 0)
                 return Ok();
 
-            string newFolderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", p.CreatorId.ToString());
-            if (!Directory.Exists(newFolderPath))            
-                Directory.CreateDirectory(newFolderPath);
-
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", newFolderPath, p.Id.ToString() + Path.GetExtension(file.FileName));
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", p.Id.ToString() + Path.GetExtension(p.FileExtention));
 
             try
             {
