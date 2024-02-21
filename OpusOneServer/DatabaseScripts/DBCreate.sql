@@ -58,6 +58,7 @@ Create Table Composers(
 	CONSTRAINT UC_Composer_Id UNIQUE (Id)
 )
 
+--delete genre
 Create Table Works(
 	Id int PRIMARY KEY NOT NULL,
 	Composer_Id int NOT NULL,
