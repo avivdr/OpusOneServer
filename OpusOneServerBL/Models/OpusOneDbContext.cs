@@ -39,7 +39,7 @@ public partial class OpusOneDbContext : DbContext
     {
         modelBuilder.Entity<Comment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC27014B2B75");
+            entity.HasKey(e => e.Id).HasName("PK__Comments__3214EC273954E3DF");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -60,7 +60,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Composer>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Composer__3214EC07698DE6C3");
+            entity.HasKey(e => e.Id).HasName("PK__Composer__3214EC075B90C08B");
 
             entity.HasIndex(e => e.Id, "UC_Composer_Id").IsUnique();
 
@@ -76,7 +76,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Forum>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC27A45E6B55");
+            entity.HasKey(e => e.Id).HasName("PK__Forums__3214EC27B000A021");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.CreatedDateTime).HasColumnType("datetime");
@@ -100,7 +100,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<ForumComment>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC270E271C94");
+            entity.HasKey(e => e.Id).HasName("PK__ForumCom__3214EC27E77CF2D6");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -121,7 +121,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Post>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC27101F09EF");
+            entity.HasKey(e => e.Id).HasName("PK__Posts__3214EC27E3F55CF8");
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Content).HasMaxLength(1000);
@@ -148,7 +148,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<User>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC271A542532");
+            entity.HasKey(e => e.Id).HasName("PK__Users__3214EC27080136B7");
 
             entity.HasIndex(e => e.Username, "UC_Username").IsUnique();
 
@@ -160,7 +160,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<Work>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Works__3214EC073E7509CB");
+            entity.HasKey(e => e.Id).HasName("PK__Works__3214EC07AD57123D");
 
             entity.HasIndex(e => e.Id, "UC_Work_Id").IsUnique();
 
@@ -176,7 +176,7 @@ public partial class OpusOneDbContext : DbContext
 
         modelBuilder.Entity<WorksUser>(entity =>
         {
-            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC27D1EC04E8");
+            entity.HasKey(e => e.Id).HasName("PK__Works_Us__3214EC2744EA710A");
 
             entity.ToTable("Works_Users");
 

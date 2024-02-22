@@ -63,7 +63,6 @@ Create Table Works(
 	Id int PRIMARY KEY NOT NULL,
 	Composer_Id int NOT NULL,
 	Title nvarchar(255) NOT NULL,
-	Genre tinyint NOT NULL,	
 	CONSTRAINT UC_Work_Id UNIQUE (Id)
 )
 
@@ -104,7 +103,7 @@ INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (145, N'Bee
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart')
 
 --Works
-INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title], [Genre]) VALUES (9334, 87, N'Cantata no. 140, "Wachet auf, ruft uns die Stimme", BWV.140', 0)
+INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title]) VALUES (9334, 87, N'Cantata no. 140, "Wachet auf, ruft uns die Stimme", BWV.140')
 
 --Users
 SET IDENTITY_INSERT [dbo].[Users] ON
