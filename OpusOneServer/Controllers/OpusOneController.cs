@@ -146,7 +146,7 @@ namespace OpusOneServer.Controllers
             if (file == null || file.Length == 0)
                 return Ok();
 
-            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", p.Id.ToString() + Path.GetExtension(p.FileExtention));
+            string path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", p.Id.ToString() + Path.GetExtension(p.FileExtension));
 
             try
             {
