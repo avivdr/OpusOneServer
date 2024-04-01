@@ -116,6 +116,33 @@ namespace OpusOneServer.Controllers
 
             return Ok(post);
         }
+
+        [Route(nameof(UploadComment))]
+        [HttpPost]
+        public async Task<ActionResult> UploadComment([FromBody] Comment comment)
+        {
+            if (comment == null) return BadRequest();
+
+            try
+            {
+                User? sessionUser = HttpContext.Session.GetObject<User>(UserKey);
+                if (comment.Creator == null || sessionUser == null || comment.Creator.Id != sessionUser.Id)
+                    return Unauthorized();
+
+                context.Attach(comment.Creator);
+                context.Attach(comment.Post);
+
+                context.Comments.Add(comment);
+
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
          
         [Route(nameof(UploadPost))]
         [HttpPost]
