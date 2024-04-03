@@ -16,26 +16,26 @@ namespace OpusOneServerBL.Models
         [NotMapped]
         public DateTime? Death { get; set; }
         [NotMapped]
-        public string Epoch { get; set; }
+        public string? Epoch { get; set; }
         [NotMapped]
-        public string Portrait { get; set; }
+        public string? Portrait { get; set; }
     }
     public partial class Work
     {
         [NotMapped]
-        public string Subtitle { get; set; }
+        public string? Subtitle { get; set; }
         //[NotMapped]
         //public List<string> SearchTerms { get; set; }
         [NotMapped]
-        public string Popular { get; set; }
+        public string? Popular { get; set; }
         [NotMapped]
-        public string Recommended { get; set; }
+        public string? Recommended { get; set; }
         [NotMapped]
-        public string SearchMode { get; set; }
+        public string? SearchMode { get; set; }
         [NotMapped]
-        public string Catalogue { get; set; }
+        public string? Catalogue { get; set; }
         [NotMapped]
         [JsonPropertyName("Catalogue_Number")]
-        public string CatalogueNumber { get; set; }
+        public string? CatalogueNumber { get; set; }
     }
 }
