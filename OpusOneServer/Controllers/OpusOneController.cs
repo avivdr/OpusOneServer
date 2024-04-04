@@ -129,8 +129,7 @@ namespace OpusOneServer.Controllers
                 if (comment.Creator == null || sessionUser == null || comment.Creator.Id != sessionUser.Id)
                     return Unauthorized();
 
-                context.Attach(comment.Creator);
-                context.Attach(comment.Post);
+                context.Attach(comment);
 
                 context.Comments.Add(comment);
 

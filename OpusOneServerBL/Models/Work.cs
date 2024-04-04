@@ -11,9 +11,9 @@ public partial class Work
 
     public int ComposerId { get; set; }
 
-    public string Title { get; set; } = null!;
+    public string Title { get; set; } = "";
 
-    public virtual Composer Composer { get; set; } = null!;
+    public virtual Composer Composer { get; set; } = new();
 
     public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
 

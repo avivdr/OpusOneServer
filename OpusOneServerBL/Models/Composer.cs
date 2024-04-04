@@ -9,10 +9,10 @@ public partial class Composer
     [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     public int Id { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string Name { get; set; } = "";
 
     [JsonPropertyName("Complete_Name")]
-    public string CompleteName { get; set; } = null!;
+    public string CompleteName { get; set; } = "";
 
     public virtual ICollection<Forum> Forums { get; set; } = new List<Forum>();
 

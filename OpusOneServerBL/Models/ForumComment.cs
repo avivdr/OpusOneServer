@@ -15,7 +15,7 @@ public partial class ForumComment
 
     public DateTime UploadDateTime { get; set; }
 
-    public virtual User Creator { get; set; } = null!;
+    public virtual User Creator { get; set; } = new();
 
-    public virtual Forum Forum { get; set; } = null!;
+    public virtual Forum Forum { get; set; } = new();
 }

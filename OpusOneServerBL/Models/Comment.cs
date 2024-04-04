@@ -11,11 +11,11 @@ public partial class Comment
 
     public int CreatorId { get; set; }
 
-    public string Content { get; set; } = null!;
+    public string Content { get; set; } = "";
 
     public DateTime UploadDateTime { get; set; }
 
-    public virtual User Creator { get; set; } = null!;
+    public virtual User Creator { get; set; } = new();
 
-    public virtual Post Post { get; set; } = null!;
+    public virtual Post Post { get; set; } = new();
 }

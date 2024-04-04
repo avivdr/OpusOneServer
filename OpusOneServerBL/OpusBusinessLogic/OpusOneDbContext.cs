@@ -21,8 +21,7 @@ public partial class OpusOneDbContext
 
     public void AttachPostData(Post p)
     {
-        if (p == null)
-            return;
+        if (p == null) return;
 
         if (p.Work != null && Works.Any(x => x.Id == p.Work.Id))
             Works.Attach(p.Work);        
@@ -34,5 +33,16 @@ public partial class OpusOneDbContext
             Composers.Attach(p.Composer);
 
         Users.Attach(p.Creator);
+    }
+
+    public void AttachCommentData(Comment c)
+    {
+        if (c == null) return;
+
+        if (c.Post != null && Posts.Any(x => x.Id == c.Post.Id) && Entry(c.Post).State == EntityState.Detached)
+            Posts.Attach(c.Post);
+
+        if (c.Creator != null && Users.Any(x => x.Id == c.Creator.Id) && Entry(c.Creator).State == EntityState.Detached)
+            Users.Attach(c.Creator);
     }
 }

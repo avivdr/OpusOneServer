@@ -1,4 +1,4 @@
-﻿using System;
+﻿    using System;
 using System.Collections.Generic;
 
 namespace OpusOneServerBL.Models;
@@ -7,9 +7,9 @@ public partial class Forum
 {
     public int Id { get; set; }
 
-    public string Title { get; set; } = null!;
+    public string Title { get; set; } = "";
 
-    public string ForumDescription { get; set; } = null!;
+    public string ForumDescription { get; set; } = "";
 
     public int CreatorId { get; set; }
 
@@ -21,7 +21,7 @@ public partial class Forum
 
     public virtual Composer? Composer { get; set; }
 
-    public virtual User Creator { get; set; } = null!;
+    public virtual User Creator { get; set; } = new();
 
     public virtual ICollection<ForumComment> ForumComments { get; set; } = new List<ForumComment>();
 
