@@ -16,7 +16,7 @@ public partial class OpusOneDbContext
 
     public IEnumerable<Post> GetPostsWithData()
     {
-        return Posts.Include(x => x.Creator).Include(x => x.Work).Include(x => x.Comments).ThenInclude(x=> x.Creator).Include(x => x.Composer);
+        return Posts.Include(x => x.Creator).Include(x => x.Work).ThenInclude(x => x.Composer).Include(x => x.Comments).ThenInclude(x=> x.Creator).Include(x => x.Composer);
     }
 
     public void AttachPostData(Post p)
