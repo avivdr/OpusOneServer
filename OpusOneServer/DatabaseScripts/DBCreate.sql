@@ -125,9 +125,6 @@ INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTim
 INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtension], [WorkId], [ComposerId]) VALUES (22, 1, N'ljhlkj', NULL, N'2024-04-01 10:22:23', N'.mp3', NULL, NULL)
 SET IDENTITY_INSERT [dbo].[Posts] OFF
 
-
-
-
 GO
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=OpusOneDB;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
