@@ -199,7 +199,7 @@ namespace OpusOneServer.Controllers
 
             if(u != null)
             {
-                HttpContext.Session.SetObject(UserKey, u);;
+                HttpContext.Session.SetObject(UserKey, u);
                 return Ok(u);
             }
 
