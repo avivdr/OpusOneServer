@@ -132,6 +132,7 @@ namespace OpusOneServer.Controllers
                 context.Attach(comment);
 
                 context.Comments.Add(comment);
+                context.Comments.OrderByDescending(x => x.UploadDateTime);
 
                 await context.SaveChangesAsync();
 
