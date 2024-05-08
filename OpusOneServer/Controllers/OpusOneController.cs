@@ -105,6 +105,32 @@ namespace OpusOneServer.Controllers
             return Ok(context.GetPostsWithData().OrderByDescending(x => x.UploadDateTime));
         }
 
+        [Route(nameof(DeletePost) + "/{id}")]
+        [HttpDelete]
+        public async Task<ActionResult<Post>> DeletePost([FromRoute] int id)
+        {
+            try
+            {
+                Post? post = context.GetPostsWithData().FirstOrDefault(x => x.Id == id);
+
+                if (post == null)
+                    return NotFound();
+
+                User? sessionUser = HttpContext.Session.GetObject<User>(UserKey);
+                if (sessionUser == null || !sessionUser.IsAdmin)
+                    return Unauthorized();
+
+                context.Posts.Remove(post);
+                await context.SaveChangesAsync();
+
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
         [Route(nameof(GetPostById) + "/{id}")]
         [HttpGet]
         public async Task<ActionResult<Post>> GetPostById([FromRoute] int id)
