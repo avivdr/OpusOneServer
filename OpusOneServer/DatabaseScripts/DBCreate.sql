@@ -11,6 +11,7 @@ Create Table Users (
 	Username nvarchar(100) NOT NULL,
 	[Password] nvarchar(100) NOT NULL,
 	Email nvarchar(100) NOT NULL,
+	IsAdmin bit NOT NULL DEFAULT 0,
 	CONSTRAINT UC_Username UNIQUE(Username)
 )
 
@@ -55,6 +56,7 @@ Create Table Composers(
 	Id int PRIMARY KEY NOT NULL,
 	[Name] varchar(255) NOT NULL,
 	Complete_Name varchar(255) NOT NULL,
+	Portrait nvarchar(255) NOT NULL,
 	CONSTRAINT UC_Composer_Id UNIQUE (Id)
 )
 
@@ -96,17 +98,17 @@ Alter Table Works_Users Add CONSTRAINT FK_Works_Users_UserID FOREIGN KEY (UserID
 GO
 
 --Composers
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (80, N'Brahms', N'Johannes Brahms')
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (87, N'Bach', N'Johann Sebastian Bach')
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven')
-INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (80, N'Brahms', N'Johannes Brahms', 'https://assets.openopus.org/portraits/46443632-1568084867.jpg')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (87, N'Bach', N'Johann Sebastian Bach','https://assets.openopus.org/portraits/12091447-1568084857.jpg')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven','https://assets.openopus.org/portraits/55910756-1568084860.jpg')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart','https://assets.openopus.org/portraits/21459195-1568084925.jpg')
 
 --Works
 INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title]) VALUES (9334, 87, N'Cantata no. 140, "Wachet auf, ruft uns die Stimme", BWV.140')
 
 --Users
 SET IDENTITY_INSERT [dbo].[Users] ON
-INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (1, N'kiki123', N'12345', N'kiki@gmail.com')
+INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email], [IsAdmin]) VALUES (1, N'kiki123', N'12345', N'kiki@gmail.com', 1)
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (2, N'kaka321', N'6969', N'kaka@kaka')
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (3, N'vulu', N'31415', N'vulu@gmail')
 INSERT INTO [dbo].[Users] ([ID], [Username], [Password], [Email]) VALUES (4, N'darkgoomer', N'mevichdor', N'darkgoomer@gmail.com')

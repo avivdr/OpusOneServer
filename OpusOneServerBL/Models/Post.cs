@@ -9,11 +9,11 @@ public partial class Post
 
     public int CreatorId { get; set; }
 
-    public string Title { get; set; } = "";
+    public string Title { get; set; } = null!;
 
     public string? Content { get; set; }
 
-    public DateTime UploadDateTime { get; set; } = new();
+    public DateTime UploadDateTime { get; set; }
 
     public string? FileExtension { get; set; }
 
@@ -25,7 +25,7 @@ public partial class Post
 
     public virtual Composer? Composer { get; set; }
 
-    public virtual User Creator { get; set; } = new();
+    public virtual User Creator { get; set; } = null!;
 
     public virtual Work? Work { get; set; }
 }

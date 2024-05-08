@@ -17,8 +17,6 @@ namespace OpusOneServerBL.Models
         public DateTime? Death { get; set; }
         [NotMapped]
         public string? Epoch { get; set; }
-        [NotMapped]
-        public string? Portrait { get; set; }
     }
     public partial class Work
     {
