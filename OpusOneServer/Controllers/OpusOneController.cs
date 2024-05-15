@@ -41,20 +41,6 @@ namespace OpusOneServer.Controllers
             return Ok("hi");
         }
 
-        [Route(nameof(SearchComposerByName) + "/{query}")]
-        [HttpGet]
-        public async Task<ActionResult<List<Composer>>> SearchComposerByName([FromRoute] string query)
-        {
-            if (query.Length < 4)
-                return BadRequest();
-
-            List<Composer>? composers = await service.SearchComposerByName(query);
-            if (composers != null)
-                return Ok(composers);
-
-            return BadRequest();
-        }
-
         #region OmniSearch
 
         [Route(nameof(OmniSearch) + "/{query}/{next}")]
@@ -126,18 +112,6 @@ namespace OpusOneServer.Controllers
             await context.SaveChangesAsync();
 
             System.IO.File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", id.ToString() + Path.GetExtension(post.FileExtension)));
-
-            return Ok(post);
-        }
-
-        [Route(nameof(GetPostById) + "/{id}")]
-        [HttpGet]
-        public async Task<ActionResult<Post>> GetPostById([FromRoute] int id)
-        {
-            Post? post = context.GetPostsWithData().FirstOrDefault(x => x.Id == id);
-
-            if (post == null)
-                return NotFound();
 
             return Ok(post);
         }
