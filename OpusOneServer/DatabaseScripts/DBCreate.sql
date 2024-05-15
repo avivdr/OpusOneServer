@@ -128,5 +128,10 @@ INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTim
 SET IDENTITY_INSERT [dbo].[Posts] OFF
 
 GO
+SET IDENTITY_INSERT [dbo].[Posts] ON
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtension], [WorkId], [ComposerId]) VALUES (23, 4, N'How would you finger this passage?', NULL, N'2024-05-15 12:50:01', N'.png', 16480, NULL)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtension], [WorkId], [ComposerId]) VALUES (24, 3, N'Happy Birthday Monteverdi!!!!!!!!!!!!!!!!', N'The Italian composer Claudio Monteverdi was born on May 15th, 1567 in Cremona, Italy.', N'2024-05-15 13:00:12', NULL, NULL, 39)
+INSERT INTO [dbo].[Posts] ([ID], [CreatorID], [Title], [Content], [UploadDateTime], [FileExtension], [WorkId], [ComposerId]) VALUES (25, 6, N'I visited Schumann''s house in Leipzig!', N'', N'2024-05-15 13:21:37', N'.jpg', NULL, 129)
+SET IDENTITY_INSERT [dbo].[Posts] OFF
 
 --scaffold-dbcontext "Server=localhost\sqlexpress;Database=OpusOneDB;Trusted_Connection=True;TrustServerCertificate=True" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models –force
