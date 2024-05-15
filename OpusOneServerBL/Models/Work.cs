@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace OpusOneServerBL.Models;
 
 public partial class Work
 {
+    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     public int Id { get; set; }
 
+    [JsonNumberHandling(JsonNumberHandling.AllowReadingFromString)]
     public int ComposerId { get; set; }
 
     public string Title { get; set; } = null!;
