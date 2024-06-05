@@ -102,9 +102,12 @@ INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (87, N'Bach', N'Johann Sebastian Bach','https://assets.openopus.org/portraits/12091447-1568084857.jpg')
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (145, N'Beethoven', N'Ludwig van Beethoven','https://assets.openopus.org/portraits/55910756-1568084860.jpg')
 INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (196, N'Mozart', N'Wolfgang Amadeus Mozart','https://assets.openopus.org/portraits/21459195-1568084925.jpg')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (39, N'Monteverdi', N'Claudio Monteverdi','https://assets.openopus.org/portraits/23287146-1568084925.jpg')
+INSERT INTO [dbo].[Composers] ([Id], [Name], [Complete_Name], [Portrait]) VALUES (129, N'Schumann', N'Robert Schumann','https://assets.openopus.org/portraits/25233320-1568084946.jpg')
 
 --Works
 INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title]) VALUES (9334, 87, N'Cantata no. 140, "Wachet auf, ruft uns die Stimme", BWV.140')
+INSERT INTO [dbo].[Works] ([Id], [Composer_Id], [Title]) VALUES (16480, 145, N'Piano Sonata no. 7 in D major, op. 10 no. 3')
 
 --Users
 SET IDENTITY_INSERT [dbo].[Users] ON
